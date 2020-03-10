@@ -1,0 +1,48 @@
+.left-sidebar {
+
+  position:absolute;
+
+  li {
+    margin-bottom:0px;
+  }
+
+  .genre-title, a, h5.title {
+    text-transform:uppercase;
+    font-size:8pt;
+    font-weight:600;
+    letter-spacing:.2rem;
+    color:#222;
+  }
+
+  a {
+    text-decoration:none;
+    display:block;
+    padding-top:.2rem;
+    font-weight:600;
+    padding-left:1rem;
+    &:hover {
+      background:rgb(27, 156, 197);;
+      color:white;
+    }
+  }
+
+} /* left sidebar */
+
+.genre-menu {
+
+  position:fixed;
+  margin-left:-999px;
+  transition:margin-left .2s ease-in-out;
+
+  li {
+    list-style:none;
+    border-bottom:1px solid #d8d8d8;
+
+    a {
+      line-height:3rem;
+    }
+
+  }
+
+} /* genre menu */
+

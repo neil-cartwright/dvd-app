@@ -1,0 +1,57 @@
+form.search div {
+  display:flex;
+  align-items:baseline;
+}
+
+.film-genre-checkboxes {
+
+  border-left:1px solid #d8d8d8;
+
+  label {
+    display:flex;
+    align-items:center;
+    height:2.5rem;
+    font-weight:300;
+    border-bottom:1px solid #dadada;
+    margin-bottom:0px;
+  }
+}
+label[for="search_term"] {
+  margin-right:8px;
+}
+.film-genre-checkboxes>label {
+  // margin-bottom:0;
+
+  &:hover {
+    cursor:pointer;
+    color:white;
+    background:#d8d8d8;
+  }
+  input[type="checkbox"] {
+    margin-left:1rem;
+    margin-bottom:0px;
+    margin-top:0px;
+    margin-right:1rem
+  }
+  input[type="checkbox"]:checked + span {
+    color:red;
+  }
+  label {
+  }
+}
+
+form {
+  h1, h2, h3, h4, h5, h6, input, label {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .2rem;
+    margin-right: 35px;
+    text-decoration: none;
+    color: #222;
+  }
+  input {
+    text-transform:none;
+    color:darken(#d8d8d8, 50%);
+  }
+}

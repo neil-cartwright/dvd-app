@@ -1,0 +1,29 @@
+.search-results  { // table wrapper
+  overflow-x:scroll;
+}
+table th {
+  text-transform:uppercase;
+  padding:5px;
+}
+table td:first-child {
+  color:#d8d8d8;
+}
+table td, thead th {
+    font-size:10pt;
+}
+tr td:last-child {
+    text-align:center;
+}
+table td {
+  padding:0rem;
+}
+table td a[href^='http'] {
+    text-decoration:none;
+    color:#1EAEDB;
+    display:block;
+    height:100%;
+    padding:1rem 0rem;
+    &:hover {
+      color:red;
+    }
+}

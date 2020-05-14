@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+let tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,8 +13,13 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css')
-   .sourceMaps();
+  .sass('resources/assets/sass/new-app.scss', 'public/css');
+
+mix.options({
+  processCssUrls: false,
+  postCss: [tailwindcss('../tailwind.config.js')]
+});
+// .sourceMaps();
 
 mix.browserSync({
   proxy: 'http://localhost:8000',

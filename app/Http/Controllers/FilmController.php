@@ -20,7 +20,7 @@ class FilmController extends BaseController
      */
     public function index()
     {
-        return view('films.index');
+        return view('temp.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class FilmController extends BaseController
         $film->save();
 
         return redirect()->back()->with('message', 'Film has been saved to database');
-        }
+    }
 
     /**
      * Display the specified resource.
@@ -73,8 +73,7 @@ class FilmController extends BaseController
         $this_film_genres = Film::where('id', $id)->pluck('genres');
         $this_film_genres = $this_film_genres[0];
 
-       return view('films.show', compact('film', 'this_film_genres'));
-
+        return view('films.show', compact('film', 'this_film_genres'));
     }
 
     /**
@@ -131,45 +130,47 @@ class FilmController extends BaseController
         return redirect('/')->with('message', 'Film was deleted');
     }
 
-    public function search() {
+    public function search()
+    {
         return view('films/search');
     }
 
-    public function searchFilms(Request $request) {
+    public function searchFilms(Request $request)
+    {
 
         $wild_search = '%' . $request->search_term . '%';
 
         $films = DB::table('films')
-        ->where('title', 'LIKE', $wild_search)
-        ->orWhere('director', 'LIKE', $wild_search)
-        ->orWhere('leading_actor', 'LIKE', $wild_search)
-        ->orWhere('supporting_actor', 'LIKE', $wild_search)
-        ->orWhere('genres', 'LIKE', $wild_search)
-        ->orWhere('year', 'LIKE', $wild_search)
-        ->orderBy('title')
-        ->get();
+            ->where('title', 'LIKE', $wild_search)
+            ->orWhere('director', 'LIKE', $wild_search)
+            ->orWhere('leading_actor', 'LIKE', $wild_search)
+            ->orWhere('supporting_actor', 'LIKE', $wild_search)
+            ->orWhere('genres', 'LIKE', $wild_search)
+            ->orWhere('year', 'LIKE', $wild_search)
+            ->orderBy('title')
+            ->get();
 
         return response()->json($films);
-
-
     }
 
-    public function searchByGenre($genre = null) {
+    public function searchByGenre($genre = null)
+    {
 
-        $films = Film::where('genres', 'LIKE', '%'.$genre.'%')->orderBy('title')->get();
+        $films = Film::where('genres', 'LIKE', '%' . $genre . '%')->orderBy('title')->get();
 
         $count = count($films);
 
         $genre = $genre;
 
-        return view('films.index', compact('films', 'genre', 'count'));
+        return view('temp.index', compact('films', 'genre', 'count'));
     }
 
-    public function searchByAlpha(Request $request, $letter = null) {
+    public function searchByAlpha(Request $request, $letter = null)
+    {
 
         $letter = $request->segment(count(request()->segments()));
 
-        $films = Film::where('title', 'LIKE', $letter.'%')->orderBy('title')->get();
+        $films = Film::where('title', 'LIKE', $letter . '%')->orderBy('title')->get();
 
         return view('films.index', compact('films'));
     }
@@ -181,4 +182,10 @@ class FilmController extends BaseController
     }
 
 
+    public function searchDetail(Request $request, $what, $who_when)
+    {
+
+        $films = Film::where($what, 'LIKE', $who_when . '%')->orderBy('title')->get();
+        return view('temp.index')->with('films', $films);
+    }
 }

@@ -15,13 +15,13 @@ class BaseController extends Controller
         'Adventure',
         'Thriller',
         'Documentary',
-        'Martial arts',
+        'Martial-arts',
         'Christmas',
         'Western',
         'Court-room-drama',
-        'Romantic comedy',
+        'Romantic-comedy',
         'Comedy',
-        'James Bond',
+        'James-Bond',
         'Prison',
         'Crime',
         'Romance',
@@ -49,21 +49,23 @@ class BaseController extends Controller
         'Suspense',
         'Musical',
         'Pixar',
-        'Black and white'
+        'Black-and-white'
     ];
 
-    public function get_genres() {
+    public function get_genres()
+    {
         return $this->genres;
     }
 
-    public function __construct() {
-      $genres = $this->get_genres();
-      sort($genres);
-      $films = Film::orderBy('title')->get();
-      $count = count($films);
+    public function __construct()
+    {
+        $genres = $this->get_genres();
+        sort($genres);
+        $films = Film::orderBy('title')->get();
+        $count = count($films);
 
-      View::share('genres', $genres);
-      View::share('films', $films);
-      View::share('count', $count);
+        View::share('genres', $genres);
+        View::share('films', $films);
+        View::share('count', $count);
     }
 }

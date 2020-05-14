@@ -16921,6 +16921,34 @@ nav.navbar {
   grid-row: 3/4;
 }
 
+@media screen and (max-width: 1335px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    min-height: 100vh;
+  }
+
+  .left-side {
+    grid-column: 1/2;
+  }
+
+  .right-side {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+
+  .footer {
+    grid-row: 4/5;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:space-y-0 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;

@@ -1,12 +1,17 @@
   <div class="w-full p-6 border-b border-1 border-solid border-gray-400 flex flex-col items-around">
 
-      <div class="title flex items-baseline py-2">
+      <div class="title flex items-baseline justify-start py-2">
           <span class="film-title text-lg font-bold mr-2 tracking-wider">{{ ucwords($film->title) }}</span>
           <span class="year hover:underline text-xs"><a
                   href="/films/search/year/{{$film->year}}">{{ $film->year }}</a></span>
+
+          @if(Auth::check())
+          <a class="ml-auto delete-film cursor-pointer" data-id="{{ $film->id }}" data-title="{{ $film->title }}">Delete
+              from database</a>
+          @endif
       </div>
 
-      <div class="credits mt-2">
+      <div class=" credits mt-2">
           <span class="text-normal font-semibold mr-2"><a class="hover:underline"
                   href="/films/search/director/{{$film->director}}">{{ $film->director ? $film->director : 'Director unknown' }}</a></span>
           <span class="text-sm italic mr-2"><a class="hover:underline"

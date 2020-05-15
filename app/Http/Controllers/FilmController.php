@@ -30,7 +30,7 @@ class FilmController extends BaseController
      */
     public function create()
     {
-        return view('films/create');
+        return view('temp/new-create');
     }
 
 
@@ -125,9 +125,10 @@ class FilmController extends BaseController
     public function destroy(Film $film, $id)
     {
         $film = Film::find($id);
+        $removed_film_title = $film->title;
         $film->delete();
 
-        return redirect('/')->with('message', 'Film was deleted');
+        return redirect('/')->with('message', 'Film ' . $removed_film_title . ' was deleted');
     }
 
     public function search()

@@ -30,7 +30,7 @@ class FilmController extends BaseController
      */
     public function create()
     {
-        return view('temp/new-create');
+        return view('temp/create');
     }
 
 
@@ -73,7 +73,7 @@ class FilmController extends BaseController
         $this_film_genres = Film::where('id', $id)->pluck('genres');
         $this_film_genres = $this_film_genres[0];
 
-        return view('films.show', compact('film', 'this_film_genres'));
+        return view('temp.create', compact('film', 'this_film_genres'));
     }
 
     /**
@@ -82,9 +82,15 @@ class FilmController extends BaseController
      * @param  \App\Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function edit(Film $film)
+    public function edit($id, Film $film)
     {
-        //
+        $film = Film::find($id);
+
+        $this_film_genres = Film::where('id', $id)->pluck('genres');
+        $this_film_genres = explode(' ', $this_film_genres[0]);
+
+
+        return view('temp.update', compact('film', 'this_film_genres'));
     }
 
     /**
@@ -96,6 +102,7 @@ class FilmController extends BaseController
      */
     public function update(Request $request, Film $film, $id)
     {
+
 
         $title = $request->input('title');
         $director = $request->input('director');
@@ -113,7 +120,7 @@ class FilmController extends BaseController
             'year' => $year
         ]);
 
-        return redirect('films/index')->with('message', 'Film details have been updated');
+        return redirect()->route('index')->with('message', 'Film details for ' . $title . ' have been updated');
     }
 
     /**

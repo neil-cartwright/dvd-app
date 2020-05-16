@@ -1,4 +1,4 @@
-@extends('temp/new-layouts.new-master-layout')
+@extends('temp/layouts.master-layout')
 @section('title', 'index')
 
 @section('main')

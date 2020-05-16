@@ -29,21 +29,7 @@
         @stack('scripts-after')
         <script>
             $(document).ready(function () {
-                let overlay = $('.confirmation-overlay-outer');
-                overlay.hide();
-                overlay.removeClass('hidden'); // removes native class which prevents fouc
-                $('.right-side').on('click', '.delete-film', function () {
-                    let theFilmId = $(this).data('id');
-                    let theFilmTitle = $(this).data('title');
-                    $('#the-film-title').html(theFilmTitle);
-                    overlay.show();
-                    $('#do-not-delete-film').on('click', function () {
-                        overlay.hide();
-                    })
-                    $('#go-ahead-and-delete-film').on('click', function () {
-                        window.location = '/films/delete/' + theFilmId;
-                    })
-                });
+
             })
         </script>
     </body>

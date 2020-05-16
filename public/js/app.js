@@ -13741,24 +13741,44 @@ module.exports = __webpack_require__(36);
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
+/**
+ * I don't need bootstrap. Adjust to require jquery
+ */
 __webpack_require__(12);
 
-document.addEventListener('DOMContentLoaded', function () {
-  var genreMenu = document.querySelector('.genre-menu');
-  var clickToShowGenreMenu = document.querySelector('.clickToShowGenreMenu');
-  var main = document.querySelector('.main');
-  clickToShowGenreMenu.addEventListener('click', function () {
-    if (genreMenu.style.position === 'fixed') {
-      genreMenu.style.position = 'inherit';
-      genreMenu.style.marginLeft = '0' + 'rem';
-      clickToShowGenreMenu.classList.add('active');
-    } else {
-      genreMenu.style.position = 'fixed';
-      genreMenu.style.marginLeft = '-999' + 'px';
-      clickToShowGenreMenu.classList.remove('active');
-    }
+$(document).ready(function () {
+
+  /**
+   * controls genre dropdown
+   */
+  $('#genres').hide();
+  $('#show-genres').on('click', function () {
+    $('#genres').slideToggle();
+    $('#genre-caret').toggleClass('fa-caret-square-up').toggleClass('fa-caret-square-down');
   });
+
+  /**
+   * controls overlay for deleting films and film deletion
+   */
+  var overlay = $('.confirmation-overlay-outer');
+  overlay.hide();
+  overlay.removeClass('hidden'); // removes native class which prevents fouc
+  $('.right-side').on('click', '.delete-film', function () {
+    var theFilmId = $(this).data('id');
+    var theFilmTitle = $(this).data('title');
+    $('#the-film-title').html(theFilmTitle);
+    overlay.show();
+    $('#do-not-delete-film').on('click', function () {
+      overlay.hide();
+    });
+    $('#go-ahead-and-delete-film').on('click', function () {
+      window.location = '/films/delete/' + theFilmId;
+    });
+  });
+
+  /**
+   * ajax form script is located in left-side.js file
+   */
 });
 
 /***/ }),

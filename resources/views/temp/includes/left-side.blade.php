@@ -88,56 +88,50 @@
 
  @push('scripts-after')
  <script>
-     $(document).ready(function () {
+     /**
+      * controls ajax search box
+      * added in this location so php can parse the url to films/search which caused bug when move to app/js file
+      */
+     let searchBox = $('#film-search');
 
-         $('#genres').hide();
-         $('#show-genres').on('click', function () {
-             $('#genres').slideToggle();
-             $('#genre-caret')
-                 .toggleClass('fa-caret-square-up')
-                 .toggleClass('fa-caret-square-down')
+     searchBox.on('keyup', function () {
+
+
+         $('#ajax-unfiltered').hide();
+         $('#ajax-filtered').show();
+         $('#current-search').html(searchBox.val());
+
+
+         $.ajaxSetup({
+             headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             }
          });
 
-         let searchBox = $('#film-search');
 
-         searchBox.on('keyup', function () {
+         $.ajax({
+             type: 'POST',
+             url: "{{ url('films/search') }}",
+             data: {
+                 search_term: searchBox.val()
+             }
+         }).done(function ($films) {
 
-             $('#ajax-unfiltered').hide();
-             $('#ajax-filtered').show();
-             $('#current-search').html(searchBox.val());
+             let output = '';
 
-
-             $.ajaxSetup({
-                 headers: {
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                 }
+             $.each($films, function (key, $film) {
+                 // split genres into an array ready for foreach loop
+                 let genres = $film.genres.split(' ');
+                 // template literal using a php include for template //
+                 output += `@include('temp/includes/each-film-ajax')`;
              });
 
-             $.ajax({
-                 type: 'POST',
-                 url: "{{ url('films/search') }}",
-                 data: {
-                     search_term: searchBox.val()
-                 }
-             }).done(function ($films) {
+             $('#ajax-filtered').html(output);
 
-                 let output = '';
-
-                 $.each($films, function (key, $film) {
-                     // split genres into an array ready for foreach loop
-                     let genres = $film.genres.split(' ');
-                     // template literal using a php include for template //
-                     output += `@include('temp/includes/each-film-ajax')`;
-                 });
-
-                 $('#ajax-filtered').html(output);
-
-                 $('#current-search-count').html($films.length + ' films');
-
-             });
+             $('#current-search-count').html($films.length + ' films');
 
          });
 
-     })
+     });
  </script>
  @endpush

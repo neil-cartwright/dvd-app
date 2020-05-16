@@ -1,20 +1,42 @@
-
+/**
+ * I don't need bootstrap. Adjust to require jquery
+ */
 require('./bootstrap');
 
+$(document).ready(function () {
 
-document.addEventListener('DOMContentLoaded', function() {
-  let genreMenu = document.querySelector('.genre-menu');
-  let clickToShowGenreMenu = document.querySelector('.clickToShowGenreMenu');
-  let main = document.querySelector('.main');
-  clickToShowGenreMenu.addEventListener('click', function() {
-    if(genreMenu.style.position === 'fixed') {
-      genreMenu.style.position = 'inherit' ;
-      genreMenu.style.marginLeft = '0' + 'rem';
-      clickToShowGenreMenu.classList.add('active');
-    } else {
-      genreMenu.style.position = 'fixed';
-      genreMenu.style.marginLeft = '-999' + 'px';
-      clickToShowGenreMenu.classList.remove('active');
-    }
+  /**
+   * controls genre dropdown
+   */
+  $('#genres').hide();
+  $('#show-genres').on('click', function () {
+    $('#genres').slideToggle();
+    $('#genre-caret')
+      .toggleClass('fa-caret-square-up')
+      .toggleClass('fa-caret-square-down')
   });
+
+  /**
+   * controls overlay for deleting films and film deletion
+   */
+  let overlay = $('.confirmation-overlay-outer');
+  overlay.hide();
+  overlay.removeClass('hidden'); // removes native class which prevents fouc
+  $('.right-side').on('click', '.delete-film', function () {
+    let theFilmId = $(this).data('id');
+    let theFilmTitle = $(this).data('title');
+    $('#the-film-title').html(theFilmTitle);
+    overlay.show();
+    $('#do-not-delete-film').on('click', function () {
+      overlay.hide();
+    })
+    $('#go-ahead-and-delete-film').on('click', function () {
+      window.location = '/films/delete/' + theFilmId;
+    })
+  });
+
+  /**
+   * ajax form script is located in left-side.js file
+   */
+
 });

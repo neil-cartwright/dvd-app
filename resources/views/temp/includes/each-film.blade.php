@@ -6,8 +6,9 @@
                   href="/films/search/year/{{$film->year}}">{{ $film->year }}</a></span>
 
           @if(Auth::check())
-          <a class="ml-auto delete-film cursor-pointer" data-id="{{ $film->id }}" data-title="{{ $film->title }}">Delete
-              from database</a>
+          <a class="ml-auto delete-film cursor-pointer text-sm hover:underline" data-id="{{ $film->id }}"
+              data-title="{{ $film->title }}">Delete</a>
+          <a class="ml-2 text-sm hover:underline" href="/films/edit/{{ $film->id }}">Update</a>
           @endif
       </div>
 

@@ -6,8 +6,10 @@
                                   }</a></span>
 
                   @if(Auth::check())
-                  <a class="ml-auto delete-film cursor-pointer" data-id="${$film.id}" data-title="${$film.title}">Delete
+                  <a class="ml-auto delete-film cursor-pointer" data-id="${$film.id}"
+                          data-title="${$film.title}#">Delete
                           from database</a>
+                  <a class="ml-4" href="/films/edit/${$film.id}">Update record</a>
                   @endif
           </div>
 

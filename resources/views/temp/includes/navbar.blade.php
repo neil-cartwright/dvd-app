@@ -8,7 +8,6 @@
             <div class="menu items-baseline flex">
                 @if(Auth::check())
                 <a class="mx-2 bg-gray-200 p-2 rounded" href="/films/create">Add Films</a>
-                <a class="mx-2 bg-gray-200 p-2 rounded" href="films/delete">Remove Films</a>
 
                 <a class="bg-red-300 p-2 rounded" href="/logout">Logout</a>
                 @elseif(!Request::is('/'))

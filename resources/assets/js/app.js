@@ -6,9 +6,10 @@ require('./bootstrap');
 $(document).ready(function () {
 
   /**
-   * controls genre dropdown
+   * controls genre dropdown. hide, followed by remove class prevents flash of content
    */
   $('#genres').hide();
+  $('#genres').removeClass('invisible');
   $('#show-genres').on('click', function () {
     $('#genres').slideToggle();
     $('#genre-caret')
@@ -25,7 +26,7 @@ $(document).ready(function () {
   $('.right-side').on('click', '.delete-film', function () {
     let theFilmId = $(this).data('id');
     let theFilmTitle = $(this).data('title');
-    $('#the-film-title').html(theFilmTitle);
+    $('#the-film-title').text(theFilmTitle);
     overlay.show();
     $('#do-not-delete-film').on('click', function () {
       overlay.hide();
@@ -38,5 +39,12 @@ $(document).ready(function () {
   /**
    * ajax form script is located in left-side.js file
    */
+
+  /**
+   * toggle login form
+   */
+  $('#show-login').on('click', function () {
+    $('.login-section').toggleClass('invisible');
+  });
 
 });

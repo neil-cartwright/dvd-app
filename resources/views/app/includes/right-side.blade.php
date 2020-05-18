@@ -2,7 +2,7 @@
 
     <div id="ajax-unfiltered">
         @foreach($films as $film)
-        @include('temp/includes/each-film')
+        @include('app/includes/each-film')
         @endforeach
     </div>
 

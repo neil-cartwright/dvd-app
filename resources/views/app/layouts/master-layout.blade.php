@@ -16,7 +16,7 @@
 
         @yield('main')
 
-        @include('temp/includes/confirmation-overlay')
+        @include('app/includes/confirmation-overlay')
 
 
         <script src="{{ asset('js/app.js') }}"></script>

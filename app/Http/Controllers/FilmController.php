@@ -20,7 +20,7 @@ class FilmController extends BaseController
      */
     public function index()
     {
-        return view('temp.index');
+        return view('app.index');
     }
 
     /**
@@ -30,7 +30,7 @@ class FilmController extends BaseController
      */
     public function create()
     {
-        return view('temp/create');
+        return view('app.create');
     }
 
 
@@ -56,7 +56,7 @@ class FilmController extends BaseController
         $film->year = $request->input('year');
         $film->save();
 
-        return redirect()->back()->with('message', 'Film has been saved to database');
+        return redirect()->back()->with('message', $film->title . ' has been saved to database 😎');
     }
 
     /**
@@ -73,7 +73,7 @@ class FilmController extends BaseController
         $this_film_genres = Film::where('id', $id)->pluck('genres');
         $this_film_genres = $this_film_genres[0];
 
-        return view('temp.create', compact('film', 'this_film_genres'));
+        return view('app.create', compact('film', 'this_film_genres'));
     }
 
     /**
@@ -90,7 +90,7 @@ class FilmController extends BaseController
         $this_film_genres = explode(' ', $this_film_genres[0]);
 
 
-        return view('temp.update', compact('film', 'this_film_genres'));
+        return view('app.update', compact('film', 'this_film_genres'));
     }
 
     /**
@@ -138,6 +138,9 @@ class FilmController extends BaseController
         return redirect('/')->with('message', 'Film ' . $removed_film_title . ' was deleted');
     }
 
+    /**
+     * not required anymore
+     */
     public function search()
     {
         return view('films/search');
@@ -170,7 +173,7 @@ class FilmController extends BaseController
 
         $genre = $genre;
 
-        return view('temp.index', compact('films', 'genre', 'count'));
+        return view('app.index', compact('films', 'genre', 'count'));
     }
 
     public function searchByAlpha(Request $request, $letter = null)
@@ -194,6 +197,6 @@ class FilmController extends BaseController
     {
 
         $films = Film::where($what, 'LIKE', $who_when . '%')->orderBy('title')->get();
-        return view('temp.index')->with('films', $films);
+        return view('app.index')->with('films', $films);
     }
 }

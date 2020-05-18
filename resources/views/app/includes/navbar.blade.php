@@ -10,9 +10,12 @@
                 <a class="mx-2 bg-gray-200 p-2 rounded" href="/films/create">Add Films</a>
 
                 <a class="bg-red-300 p-2 rounded" href="/logout">Logout</a>
-                @elseif(!Request::is('/'))
-                <a class="mx-2 bg-blue-400 p-2 rounded text-white" href="/">Login</a>
                 @endif
+
+                @unless(Auth::check())
+                <a class="mx-2 bg-blue-400 hover:bg-blue-500 p-2 cursor-pointer rounded text-white"
+                    id="show-login">Toggle login</a>
+                @endunless
             </div>
         </div>
     </div>

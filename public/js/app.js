@@ -13747,33 +13747,32 @@ module.exports = __webpack_require__(36);
 __webpack_require__(12);
 
 $(document).ready(function () {
-
   /**
    * controls genre dropdown. hide, followed by remove class prevents flash of content
    */
-  $('#genres').hide();
-  $('#genres').removeClass('invisible');
-  $('#show-genres').on('click', function () {
-    $('#genres').slideToggle();
-    $('#genre-caret').toggleClass('fa-caret-square-up').toggleClass('fa-caret-square-down');
+  $("#genres").hide();
+  $("#genres").removeClass("invisible");
+  $("#show-genres").on("click", function () {
+    $("#genres").slideToggle();
+    $("#genre-caret").toggleClass("fa-caret-square-up").toggleClass("fa-caret-square-down");
   });
 
   /**
    * controls overlay for deleting films and film deletion
    */
-  var overlay = $('.confirmation-overlay-outer');
+  var overlay = $(".confirmation-overlay-outer");
   overlay.hide();
-  overlay.removeClass('hidden'); // removes native class which prevents fouc
-  $('.right-side').on('click', '.delete-film', function () {
-    var theFilmId = $(this).data('id');
-    var theFilmTitle = $(this).data('title');
-    $('#the-film-title').text(theFilmTitle);
+  overlay.removeClass("hidden"); // removes native class which prevents fouc
+  $(".right-side").on("click", ".delete-film", function () {
+    var theFilmId = $(this).data("id");
+    var theFilmTitle = $(this).data("title");
+    $("#the-film-title").text(theFilmTitle);
     overlay.show();
-    $('#do-not-delete-film').on('click', function () {
+    $("#do-not-delete-film").on("click", function () {
       overlay.hide();
     });
-    $('#go-ahead-and-delete-film').on('click', function () {
-      window.location = '/films/delete/' + theFilmId;
+    $("#go-ahead-and-delete-film").on("click", function () {
+      window.location = "/films/delete/" + theFilmId;
     });
   });
 
@@ -13784,9 +13783,13 @@ $(document).ready(function () {
   /**
    * toggle login form
    */
-  $('#show-login').on('click', function () {
-    $('.login-section').toggleClass('invisible');
-  });
+  function showLoginForm() {
+    $("#show-login").on("click", function () {
+      $(".login-section").toggleClass("invisible");
+    });
+  }
+
+  showLoginForm();
 });
 
 /***/ }),

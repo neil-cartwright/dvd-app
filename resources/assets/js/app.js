@@ -1,39 +1,38 @@
 /**
  * I don't need bootstrap. Adjust to require jquery
  */
-require('./bootstrap');
+require("./bootstrap");
 
-$(document).ready(function () {
-
+$(document).ready(function() {
   /**
    * controls genre dropdown. hide, followed by remove class prevents flash of content
    */
-  $('#genres').hide();
-  $('#genres').removeClass('invisible');
-  $('#show-genres').on('click', function () {
-    $('#genres').slideToggle();
-    $('#genre-caret')
-      .toggleClass('fa-caret-square-up')
-      .toggleClass('fa-caret-square-down')
+  $("#genres").hide();
+  $("#genres").removeClass("invisible");
+  $("#show-genres").on("click", function() {
+    $("#genres").slideToggle();
+    $("#genre-caret")
+      .toggleClass("fa-caret-square-up")
+      .toggleClass("fa-caret-square-down");
   });
 
   /**
    * controls overlay for deleting films and film deletion
    */
-  let overlay = $('.confirmation-overlay-outer');
+  let overlay = $(".confirmation-overlay-outer");
   overlay.hide();
-  overlay.removeClass('hidden'); // removes native class which prevents fouc
-  $('.right-side').on('click', '.delete-film', function () {
-    let theFilmId = $(this).data('id');
-    let theFilmTitle = $(this).data('title');
-    $('#the-film-title').text(theFilmTitle);
+  overlay.removeClass("hidden"); // removes native class which prevents fouc
+  $(".right-side").on("click", ".delete-film", function() {
+    let theFilmId = $(this).data("id");
+    let theFilmTitle = $(this).data("title");
+    $("#the-film-title").text(theFilmTitle);
     overlay.show();
-    $('#do-not-delete-film').on('click', function () {
+    $("#do-not-delete-film").on("click", function() {
       overlay.hide();
-    })
-    $('#go-ahead-and-delete-film').on('click', function () {
-      window.location = '/films/delete/' + theFilmId;
-    })
+    });
+    $("#go-ahead-and-delete-film").on("click", function() {
+      window.location = "/films/delete/" + theFilmId;
+    });
   });
 
   /**
@@ -43,9 +42,11 @@ $(document).ready(function () {
   /**
    * toggle login form
    */
-  $('#show-login').on('click', function () {
-    $('.login-section').toggleClass('invisible');
-  });
+  function showLoginForm() {
+    $("#show-login").on("click", function() {
+      $(".login-section").toggleClass("invisible");
+    });
+  }
 
-
+  showLoginForm();
 });

@@ -2,4 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
 @import 'new-modules/layout';
+
+body {
+    font-family: 'Hepta Slab',
+        serif;
+}
+
+.slab {
+    font-family: 'Hepta Slab', serif;
+}
+
+.sans {
+    font-family: 'Open Sans', sans-serif;
+}

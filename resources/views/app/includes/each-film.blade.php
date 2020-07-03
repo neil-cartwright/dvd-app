@@ -1,20 +1,21 @@
-  <div class="w-full p-6 border-b border-1 border-solid border-gray-400 flex flex-col items-around">
+  <div class="w-full p-6 border-b border-1 border-solid border-gray-400 flex flex-col items-around sans">
 
-      <div class="title flex items-baseline justify-start py-2">
-          <span
-              class="film-title text-lg font-bold mr-2 tracking-wider bg-gray-200 px-2 -ml-2">{{ ucwords($film->title) }}</span>
-          <span class="year hover:underline text-xs"><a
-                  href="/films/search/year/{{$film->year}}">{{ $film->year }}</a></span>
+      <div class="title flex justify-between items-center py-2">
+          <div><span
+                  class="slab film-title text-sm md:text-lg font-bold mr-2 tracking-wider bg-gray-200 px-2 -ml-2">{{ ucwords($film->title) }}</span>
+              <span class="year hover:underline text-xs"><a
+                      href="/films/search/year/{{$film->year}}">{{ $film->year }}</a></span></div>
 
           @if(Auth::check())
-          <a class="ml-auto delete-film cursor-pointer text-sm hover:underline" data-id="{{ $film->id }}"
-              data-title="{{ $film->title }}">Delete</a>
-          <a class="ml-2 text-sm hover:underline" href="/films/edit/{{ $film->id }}">Update</a>
+          <div class="flex flex-col md:flex-row">
+              <a class="ml-auto delete-film cursor-pointer text-sm hover:underline" data-id="{{ $film->id }}"
+                  data-title="{{ $film->title }}">Delete</a>
+              <a class="ml-2 text-sm hover:underline" href="/films/edit/{{ $film->id }}">Update</a></div>
           @endif
       </div>
 
       <div class="credits mt-2 flex flex-wrap">
-          <span class="text-base font-semibold mr-4 py-1"><a class="hover:underline"
+          <span class="text-sm md:text-base font-semibold mr-4 py-1"><a class="hover:underline"
                   href="/films/search/director/{{$film->director}}">{{ $film->director ? $film->director : 'Director unknown' }}</a></span>
           <div class="flex flex-grow items-center justify-start">
               <span class="text-sm italic mr-2"><a class="hover:underline"

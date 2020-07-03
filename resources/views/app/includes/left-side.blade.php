@@ -12,7 +12,7 @@
          <span class="p-2 rounded
              font-semibold" id="current-search">{{ request()->segment(count(request()->segments())) }}
          </span>
-         <span class="ml-auto" id="current-search-count">&nbsp;{{ $films->count() }}
+         <span class="ml-auto sans" id="current-search-count">&nbsp;{{ $films->count() }}
              @if($films->count() > 1)
              films
              @else
@@ -32,7 +32,7 @@
          <a class="p-2 m-1 rounded border-solid border-gray-500 bg-green-500 hover:bg-green-600 text-white" href="/">All
              films</a>
          @foreach($genres as $genre)
-         <a class="p-2 m-1 rounded border-solid border-gray-500  text-center flex-grow bg-gray-300 hover:bg-gray-400
+         <a class="sans p-2 m-1 rounded border-solid border-gray-500  text-center flex-grow bg-gray-300 hover:bg-gray-400
          @if( request()->segment(count(request()->segments())) == $genre )
             bg-teal-400 font-semibold text-white
          @endif
@@ -46,7 +46,7 @@
          <form class="flex-grow">
              <input id="film-search"
                  class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 w-full appearance-none leading-normal"
-                 type="email" placeholder="Steven Spielberg" autofocus>
+                 type="text" placeholder="Steven Spielberg" autofocus>
          </form>
      </div>
 
@@ -94,6 +94,7 @@
  <script>
      /**
       * controls ajax search box
+      * jQuery filter not asyncronous so chose this method after test
       * added in this location so php can parse the url to films/search which caused bug when move to app/js file
       */
      let searchBox = $('#film-search');
@@ -131,9 +132,11 @@
                  let genres = $film.genres.split(' ');
                  // template literal using a php include for template //
                  output += `@include('app/includes/each-film-ajax')`;
+
              });
 
              $('#ajax-filtered').html(output);
+
 
              $('#current-search-count').html($films.length + ' films');
 
